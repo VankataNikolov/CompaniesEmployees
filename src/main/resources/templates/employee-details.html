@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="fragments/fragments.html::head"></th:block>
+<body>
+<th:block th:replace="fragments/fragments::header"></th:block>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <main class="jumbotron text-center rounded col-md-12 align-self-center">
+                <div class="justify-content-center">
+                    <h1>Employee Details</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 bg-dark">
+                        <h2>Employee</h2>
+                        <h4>First Name: {firstName}</h4>
+                        <h4>Last Name: {lastName}</h4>
+                        <h4>Education Level: {educationLevel}</h4>
+                        <h4>Job title: {jobTitle}</h4>
+                        <h4>Birthdate: {birthDate}</h4>
+                        <h4>Salary: {salary in format 10$}</h4>
+                        <h4>Company: {company name}</h4>
+                        <div class="align-bottom">
+						<a class="btn btn-danger align-bottom"
+                                                     href="/">Delete employee</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 bg-dark"><img src="/pic/employee.png" height="350px"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+</main>
+<th:block th:replace="fragments/fragments.html::footer"></th:block>
+</body>
+</html>

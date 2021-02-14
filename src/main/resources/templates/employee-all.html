@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="fragments/fragments::head"></th:block>
+<body>
+
+<th:block th:replace="fragments/fragments::header"></th:block>
+<main>
+    <div class="container">
+        <h2 class="text-center text-dark bg-light rounded-circle mt-5">All employees</h2>
+        <hr style="width: 50%"/>
+        <div class='row mb-4 d-flex justify-content-around'>
+            
+                <div class="col-md-4 d-flex flex-column bg-text mb-3 rounded">
+                    <h2>Full name: {firstName} {lastName}</h2>
+                    <h4>Job title: {jobTitle}</h4>
+                    <h4>Birth Date: {birthDate}</h4>
+                    <h4><a class="btn-block" href="/">Detail info</a></h4>
+                </div>
+				<div class="col-md-4 d-flex flex-column bg-text mb-3 rounded">
+                    <h2>Full name: {firstName} {lastName}</h2>
+                    <h4>Job title: {jobTitle}</h4>
+                    <h4>Birth Date: {birthDate}</h4>
+                    <h4><a class="btn-block" href="/">Detail info</a></h4>
+                </div>
+				<div class="col-md-4 d-flex flex-column bg-text mb-3 rounded">
+                    <h2>Full name: {firstName} {lastName}</h2>
+                    <h4>Job title: {jobTitle}</h4>
+                    <h4>Birth Date: {birthDate}</h4>
+                    <h4><a class="btn-block" href="/">Detail info</a></h4>
+                </div>
+          
+        </div>
+    </div>
+</main>
+
+<th:block th:replace="fragments/fragments::footer"></th:block>
+</body>
+</html>
