@@ -6,4 +6,5 @@ import softuni.linkedout_validationlab.model.entity.CompanyEntity;
 
 @Repository
 public interface CompaniesRepository extends JpaRepository<CompanyEntity, String> {
+    CompanyEntity findByName(String companyName);
 }

@@ -36,4 +36,10 @@ public class CompaniesServiceImpl implements CompaniesService {
         CompanyEntity savedCompany = this.companiesRepository.save(this.modelMapper.map(companyServiceModel, CompanyEntity.class));
         return this.modelMapper.map(savedCompany, CompanyServiceModel.class);
     }
+
+    @Override
+    public CompanyEntity findCompanyByName(String companyName) {
+
+        return this.companiesRepository.findByName(companyName);
+    }
 }

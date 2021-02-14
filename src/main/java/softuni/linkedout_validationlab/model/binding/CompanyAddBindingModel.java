@@ -1,5 +1,7 @@
 package softuni.linkedout_validationlab.model.binding;
 
+import softuni.linkedout_validationlab.model.validation.UniqueCompanyName;
+
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -33,6 +35,7 @@ public class CompanyAddBindingModel {
         this.description = description;
     }
 
+    @UniqueCompanyName
     @NotBlank
     @Size(min = 2, max = 10, message = "Name length must be between 2 and 10 characters")
     public String getName() {
