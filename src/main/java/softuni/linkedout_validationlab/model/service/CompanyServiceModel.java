@@ -1,20 +1,26 @@
-package softuni.linkedout_validationlab.model.binding;
+package softuni.linkedout_validationlab.model.service;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
-public class CompanyAddBindingModel {
+public class CompanyServiceModel {
+
+    private String id;
     private BigDecimal budget;
     private String description;
     private String name;
     private String town;
 
-    public CompanyAddBindingModel() {
+    public CompanyServiceModel() {
     }
 
-    @DecimalMin(value = "0", message = "Budget must be positive number")
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public BigDecimal getBudget() {
         return budget;
     }
@@ -23,8 +29,6 @@ public class CompanyAddBindingModel {
         this.budget = budget;
     }
 
-    @NotBlank
-    @Size(min = 10, message = "Description must be at least 10 characters")
     public String getDescription() {
         return description;
     }
@@ -33,8 +37,6 @@ public class CompanyAddBindingModel {
         this.description = description;
     }
 
-    @NotBlank
-    @Size(min = 2, max = 10, message = "Name length must be between 2 and 10 characters")
     public String getName() {
         return name;
     }
@@ -43,8 +45,6 @@ public class CompanyAddBindingModel {
         this.name = name;
     }
 
-    @NotBlank
-    @Size(min = 2, max = 10, message = "Town must be between 2 and 10 characters")
     public String getTown() {
         return town;
     }

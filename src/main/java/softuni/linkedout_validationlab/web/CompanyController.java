@@ -1,19 +1,31 @@
 package softuni.linkedout_validationlab.web;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import softuni.linkedout_validationlab.model.binding.CompanyAddBindingModel;
+import softuni.linkedout_validationlab.model.service.CompanyServiceModel;
+import softuni.linkedout_validationlab.service.CompaniesService;
 
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/companies")
 public class CompanyController {
+
+    private final CompaniesService companiesService;
+    private final ModelMapper modelMapper;
+
+    public CompanyController(CompaniesService companiesService, ModelMapper modelMapper) {
+        this.companiesService = companiesService;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping("add")
     public String companyAdd(Model model){
@@ -34,12 +46,23 @@ public class CompanyController {
             return "redirect:add";
         }
 
+        this.companiesService.saveNewCompany(this.modelMapper.map(companyAddBindingModel, CompanyServiceModel.class));
+
         return "redirect:all";
     }
 
     @GetMapping("all")
     public String companyAll(Model model){
+
+        model.addAttribute("companies", this.companiesService.getAllCompanies());
+
         return "company-all";
+    }
+
+    @GetMapping("/details/{id}")
+    public String companyDetails(@PathVariable String id, Model model){
+
+        return "company-details";
     }
 }
 
