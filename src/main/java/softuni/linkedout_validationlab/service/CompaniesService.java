@@ -13,4 +13,6 @@ public interface CompaniesService {
     CompanyServiceModel saveNewCompany(CompanyServiceModel companyServiceModel);
 
     CompanyEntity findCompanyByName(String companyName);
+
+    List<String> getAllCompanyNames();
 }

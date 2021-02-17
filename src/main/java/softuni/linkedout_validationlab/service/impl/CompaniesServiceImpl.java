@@ -42,4 +42,10 @@ public class CompaniesServiceImpl implements CompaniesService {
 
         return this.companiesRepository.findByName(companyName);
     }
+
+    @Override
+    public List<String> getAllCompanyNames() {
+
+        return this.companiesRepository.getAllCompanyNames();
+    }
 }

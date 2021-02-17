@@ -1,17 +1,11 @@
-package softuni.linkedout_validationlab.model.entity;
+package softuni.linkedout_validationlab.model.service;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import softuni.linkedout_validationlab.model.entity.enums.EducationLevelsEnum;
 
-import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "employees")
-public class EmployeeEntity extends BaseEntity{
+public class EmployeeServiceModel {
 
     private LocalDate birthDate;
     private EducationLevelsEnum educationLevel;
@@ -19,13 +13,11 @@ public class EmployeeEntity extends BaseEntity{
     private String jobTitle;
     private String lastName;
     private BigDecimal salary;
-    private CompanyEntity company;
+    private CompanyServiceModel company;
 
-    public EmployeeEntity() {
+    public EmployeeServiceModel() {
     }
 
-    @DateTimeFormat(pattern = "MM-dd-yyyy")
-    @Column(name = "birth_date", nullable = false)
     public LocalDate getBirthDate() {
         return birthDate;
     }
@@ -34,8 +26,6 @@ public class EmployeeEntity extends BaseEntity{
         this.birthDate = birthDate;
     }
 
-    @Column(name = "education_level")
-    @Enumerated(EnumType.STRING)
     public EducationLevelsEnum getEducationLevel() {
         return educationLevel;
     }
@@ -44,8 +34,6 @@ public class EmployeeEntity extends BaseEntity{
         this.educationLevel = educationLevel;
     }
 
-    @Column(name = "first_name", nullable = false)
-    @Size(min = 2)
     public String getFirstName() {
         return firstName;
     }
@@ -54,7 +42,6 @@ public class EmployeeEntity extends BaseEntity{
         this.firstName = firstName;
     }
 
-    @Column(name = "job_title", nullable = false)
     public String getJobTitle() {
         return jobTitle;
     }
@@ -63,8 +50,6 @@ public class EmployeeEntity extends BaseEntity{
         this.jobTitle = jobTitle;
     }
 
-    @Column(name = "last_name", nullable = false)
-    @Size(min = 2)
     public String getLastName() {
         return lastName;
     }
@@ -73,8 +58,6 @@ public class EmployeeEntity extends BaseEntity{
         this.lastName = lastName;
     }
 
-    @Column(name = "salary", nullable = false)
-    @DecimalMin("0")
     public BigDecimal getSalary() {
         return salary;
     }
@@ -83,12 +66,11 @@ public class EmployeeEntity extends BaseEntity{
         this.salary = salary;
     }
 
-    @ManyToOne
-    public CompanyEntity getCompany() {
+    public CompanyServiceModel getCompany() {
         return company;
     }
 
-    public void setCompany(CompanyEntity company) {
+    public void setCompany(CompanyServiceModel company) {
         this.company = company;
     }
 }
