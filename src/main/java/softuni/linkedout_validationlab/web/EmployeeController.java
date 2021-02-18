@@ -4,18 +4,18 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import softuni.linkedout_validationlab.model.binding.EmployeeAddBindingModel;
 import softuni.linkedout_validationlab.model.entity.enums.EducationLevelsEnum;
 import softuni.linkedout_validationlab.model.service.EmployeeServiceModel;
+import softuni.linkedout_validationlab.model.view.EmployeeSecondaryViewModel;
 import softuni.linkedout_validationlab.service.CompaniesService;
 import softuni.linkedout_validationlab.service.EmployeesService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/employees")
@@ -67,7 +67,30 @@ public class EmployeeController {
     }
 
     @GetMapping("/all")
-    public String employeeAll(){
+    public String employeeAll(Model model){
+
+        List<EmployeeSecondaryViewModel> employeeSecondaryViewModels = this.employeesService.getAllEmployees()
+                .stream()
+                .map(employeeService -> this.modelMapper.map(employeeService, EmployeeSecondaryViewModel.class))
+                .collect(Collectors.toList());
+        model.addAttribute("allEmployeesFirstNameAsc", employeeSecondaryViewModels);
+
         return "employee-all";
+    }
+
+    @GetMapping("/details/{id}")
+    public String employeeDetails(@PathVariable String id, Model model){
+
+        EmployeeServiceModel employeeById = this.employeesService.getEmployeeById(id);
+        model.addAttribute("employee", employeeById);
+
+        return "employee-details";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteEmployee(@PathVariable String id){
+        this.employeesService.deleteEmployee(id);
+
+        return "redirect:/employees/all";
     }
 }
