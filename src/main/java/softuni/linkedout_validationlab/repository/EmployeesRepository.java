@@ -13,4 +13,5 @@ public interface EmployeesRepository extends JpaRepository<EmployeeEntity, Strin
     @Modifying
     @Query("delete from EmployeeEntity e where e.id=:id")
     int deleteEmployee(@Param("id") String id);
+
 }

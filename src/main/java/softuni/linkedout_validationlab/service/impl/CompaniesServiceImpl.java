@@ -3,6 +3,7 @@ package softuni.linkedout_validationlab.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import softuni.linkedout_validationlab.model.entity.CompanyEntity;
 import softuni.linkedout_validationlab.model.service.CompanyServiceModel;
 import softuni.linkedout_validationlab.model.view.CompanySecondaryViewModel;
@@ -47,5 +48,16 @@ public class CompaniesServiceImpl implements CompaniesService {
     public List<String> getAllCompanyNames() {
 
         return this.companiesRepository.getAllCompanyNames();
+    }
+
+    @Override
+    public CompanyServiceModel getCompanyById(String id) {
+
+        return this.modelMapper.map(this.companiesRepository.findById(id).get(), CompanyServiceModel.class);
+    }
+
+    @Override
+    public void deleteCompany(String id) {
+        this.companiesRepository.deleteById(id);
     }
 }

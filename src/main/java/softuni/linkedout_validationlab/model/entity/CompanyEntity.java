@@ -1,11 +1,10 @@
 package softuni.linkedout_validationlab.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(name = "companies")
@@ -15,6 +14,7 @@ public class CompanyEntity extends BaseEntity{
     private String description;
     private String name;
     private String town;
+    private Set<EmployeeEntity> employees;
 
     public CompanyEntity() {
     }
@@ -57,5 +57,14 @@ public class CompanyEntity extends BaseEntity{
 
     public void setTown(String town) {
         this.town = town;
+    }
+
+    @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    public Set<EmployeeEntity> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<EmployeeEntity> employees) {
+        this.employees = employees;
     }
 }

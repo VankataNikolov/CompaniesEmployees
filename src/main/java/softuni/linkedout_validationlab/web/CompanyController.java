@@ -62,7 +62,16 @@ public class CompanyController {
     @GetMapping("/details/{id}")
     public String companyDetails(@PathVariable String id, Model model){
 
+        model.addAttribute("company", this.companiesService.getCompanyById(id));
+
         return "company-details";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteCompany(@PathVariable String id){
+        this.companiesService.deleteCompany(id);
+
+        return "redirect:/companies/all";
     }
 }
 

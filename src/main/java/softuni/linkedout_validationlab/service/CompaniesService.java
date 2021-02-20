@@ -15,4 +15,8 @@ public interface CompaniesService {
     CompanyEntity findCompanyByName(String companyName);
 
     List<String> getAllCompanyNames();
+
+    CompanyServiceModel getCompanyById(String id);
+
+    void deleteCompany(String id);
 }
