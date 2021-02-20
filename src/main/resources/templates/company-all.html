@@ -8,6 +8,11 @@
     <div class="container">
         <h2 class="text-center text-dark bg-light rounded-circle mt-5">All companies</h2>
         <hr style="width: 50%"/>
+        <div th:if="${addSuccess}" class="alert alert-success alert-dismissible fade show">
+            <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong><th:block th:text="| Add ''${newCompanyName}'' company successfully|">Added new company</th:block>
+        </div>
+
         <div class='row mb-4 d-flex justify-content-around'>
           
                 <div th:each="company : ${companies}" th:object="${company}" class="col-md-4 d-flex flex-column bg-text mb-3 rounded-circle">

@@ -1,6 +1,7 @@
 package softuni.linkedout_validationlab.model.binding;
 
 import softuni.linkedout_validationlab.model.entity.enums.EducationLevelsEnum;
+import softuni.linkedout_validationlab.model.validation.AgeAbove;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
@@ -69,6 +70,7 @@ public class EmployeeAddBindingModel {
     }
 
     @NotBlank(message = "Must select a birth date !")
+    @AgeAbove(value = 18, message = "The employees' age must be min 18")
     public String getBirthDate() {
         return birthDate;
     }

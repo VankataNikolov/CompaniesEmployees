@@ -46,14 +46,21 @@ public class CompanyController {
             return "redirect:add";
         }
 
-        this.companiesService.saveNewCompany(this.modelMapper.map(companyAddBindingModel, CompanyServiceModel.class));
+        CompanyServiceModel newCompany = this.companiesService.saveNewCompany(this.modelMapper.map(companyAddBindingModel, CompanyServiceModel.class));
+        redirectAttributes.addFlashAttribute("addSuccess", true);
+        redirectAttributes.addFlashAttribute("newCompanyName", newCompany.getName());
 
         return "redirect:all";
     }
 
     @GetMapping("all")
     public String companyAll(Model model){
-
+        if(!model.containsAttribute("addSuccess")){
+            model.addAttribute("addSuccess", false);
+        }
+        if(!model.containsAttribute("newCompanyName")){
+            model.addAttribute("newCompanyName", "name");
+        }
         model.addAttribute("companies", this.companiesService.getAllCompanies());
 
         return "company-all";
