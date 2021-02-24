@@ -5,6 +5,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import softuni.linkedout_validationlab.model.binding.EmployeeAddBindingModel;
+import softuni.linkedout_validationlab.model.entity.CompanyEntity;
 import softuni.linkedout_validationlab.model.entity.EmployeeEntity;
 import softuni.linkedout_validationlab.model.service.CompanyServiceModel;
 import softuni.linkedout_validationlab.model.service.EmployeeServiceModel;
@@ -12,7 +13,6 @@ import softuni.linkedout_validationlab.repository.EmployeesRepository;
 import softuni.linkedout_validationlab.service.CompaniesService;
 import softuni.linkedout_validationlab.service.EmployeesService;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,11 +32,8 @@ public class EmployeesServiceImpl implements EmployeesService {
 
     @Override
     public void saveNewEmployee(EmployeeServiceModel employeeServiceModel, EmployeeAddBindingModel employeeAddBindingModel) {
-        employeeServiceModel.setCompany(this.modelMapper.map(this.companiesService.findCompanyByName(employeeAddBindingModel.getCompany()), CompanyServiceModel.class));
-        employeeServiceModel.setBirthDate(LocalDate.of(
-                Integer.parseInt(employeeAddBindingModel.getBirthDate().substring(0, 4)),
-                Integer.parseInt(employeeAddBindingModel.getBirthDate().substring(6, 7)),
-                Integer.parseInt(employeeAddBindingModel.getBirthDate().substring(9, 10))));
+        CompanyEntity employeeCompany = this.companiesService.findCompanyByName(employeeAddBindingModel.getCompany());
+        employeeServiceModel.setCompany(this.modelMapper.map(employeeCompany, CompanyServiceModel.class));
         this.employeesRepository.save(this.modelMapper.map(employeeServiceModel, EmployeeEntity.class));
     }
 

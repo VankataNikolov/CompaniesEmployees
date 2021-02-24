@@ -26,11 +26,11 @@
                     <input th:field="*{lastName}" type="text" class="form-control text-center" id="lastName" aria-describedby="lastName" name="lastName"/>
                     <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger">Error message</small>
                 </div>
-                <fieldset th:field="*{educationLevel}" class="form-group">
+                <fieldset class="form-group">
                     <legend>Choose Education Level</legend>
                     <div th:each="level : ${educationLevelsEnums}" class="form-check">
                         <label class="form-check-label">
-                            <input th:value="${level}" type="radio" class="form-check-input" name="educationLevel"/>
+                            <input th:field="*{educationLevel}" th:value="${level}" th:selected="${level} == *{educationLevel}" type="radio" class="form-check-input" name="educationLevel"/>
                             <span th:text="${level}">Master</span>
                         </label>
                     </div>

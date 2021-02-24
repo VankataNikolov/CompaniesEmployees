@@ -1,13 +1,12 @@
 package softuni.linkedout_validationlab.model.binding;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import softuni.linkedout_validationlab.model.entity.enums.EducationLevelsEnum;
 import softuni.linkedout_validationlab.model.validation.AgeAbove;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class EmployeeAddBindingModel {
 
@@ -16,7 +15,7 @@ public class EmployeeAddBindingModel {
     private EducationLevelsEnum educationLevel;
     private String company;
     private String jobTitle;
-    private String birthDate;
+    private LocalDate birthDate;
     private BigDecimal salary;
 
     public EmployeeAddBindingModel() {
@@ -69,17 +68,18 @@ public class EmployeeAddBindingModel {
         this.jobTitle = jobTitle;
     }
 
-    @NotBlank(message = "Must select a birth date !")
     @AgeAbove(value = 18, message = "The employees' age must be min 18")
-    public String getBirthDate() {
+    @PastOrPresent(message = "Invalid birth date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
-    @DecimalMin(value = "0", message = "Must input a salary !")
+    @DecimalMin(value = "100", message = "Must input a min salary of 100!")
     public BigDecimal getSalary() {
         return salary;
     }

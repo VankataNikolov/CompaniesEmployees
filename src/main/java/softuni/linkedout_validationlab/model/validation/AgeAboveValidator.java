@@ -5,7 +5,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class AgeAboveValidator implements ConstraintValidator<AgeAbove, String> {
+public class AgeAboveValidator implements ConstraintValidator<AgeAbove, LocalDate> {
 
     private int age;
 
@@ -15,18 +15,12 @@ public class AgeAboveValidator implements ConstraintValidator<AgeAbove, String> 
     }
 
     @Override
-    public boolean isValid(String birthDate, ConstraintValidatorContext constraintValidatorContext) {
-        if(birthDate == null || birthDate.isEmpty()){
-            return false;
-        }
+    public boolean isValid(LocalDate birthDate, ConstraintValidatorContext constraintValidatorContext) {
+
         try{
-            LocalDate dateBirth = LocalDate.of(
-                    Integer.parseInt(birthDate.substring(0, 4)),
-                    Integer.parseInt(birthDate.substring(6, 7)),
-                    Integer.parseInt(birthDate.substring(9, 10)));
-            int currentYears = Period.between(dateBirth, LocalDate.now()).getYears();
+            int currentYears = Period.between(birthDate, LocalDate.now()).getYears();
             return currentYears - age >= 0;
-        }catch (NumberFormatException e){
+        }catch (Exception e){
             return false;
         }
 
