@@ -25,4 +25,6 @@ public class UserController {
     public String register(){
         return "register";
     }
+
+
 }

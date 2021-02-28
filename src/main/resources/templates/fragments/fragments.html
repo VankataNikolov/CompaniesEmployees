@@ -33,6 +33,9 @@
                     <a class="nav-item nav-link text-white" href="/users/login">Login</a>
                     <a class="nav-item nav-link text-white" href="/users/register">Register</a>
                 </th:block>
+                <th:block sec:authorize="isAuthenticated()">
+                    <a class="nav-item nav-link text-white" href="/logout">Logout</a>
+                </th:block>
 
             </div>
         </div>

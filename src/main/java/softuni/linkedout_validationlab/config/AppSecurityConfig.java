@@ -23,19 +23,23 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/js/**", "/css/**", "/pic/**").permitAll()
-                .antMatchers("/", "/users/login", "/users/register").permitAll()
-                .antMatchers("/companies/all", "/employees/all").permitAll()
-                .antMatchers("/**").authenticated()
-                .and()
-                .formLogin().
-                        loginPage("/users/login").
-                        usernameParameter("username").
-                        passwordParameter("password").
-                        defaultSuccessUrl("/").
-                        failureForwardUrl("/users/login-failure");
+                .csrf().disable().
+                authorizeRequests().
+                antMatchers("/js/**", "/css/**", "/pic/**").permitAll().
+                antMatchers("/", "/users/login", "/users/register").permitAll().
+                antMatchers("/companies/all", "/employees/all").permitAll().
+                antMatchers("/employees/add", "/companies/add").hasAuthority("ADMIN").
+                antMatchers("/**").authenticated().
+        and().
+                formLogin().
+                    loginPage("/users/login").
+                    usernameParameter("username").
+                    passwordParameter("password").
+                    defaultSuccessUrl("/").
+                    failureForwardUrl("/users/login-failure").
+                and().
+                logout().
+                    logoutSuccessUrl("/");
     }
 
     @Override
