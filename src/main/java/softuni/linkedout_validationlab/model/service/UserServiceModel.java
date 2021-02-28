@@ -1,28 +1,27 @@
-package softuni.linkedout_validationlab.model.entity;
+package softuni.linkedout_validationlab.model.service;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import softuni.linkedout_validationlab.model.entity.UserRoleEntity;
+
 import java.util.List;
 
-@Entity
-@Table(name = "users")
-public class UserEntity extends BaseEntity {
+public class UserServiceModel {
 
+    private String id;
     private String username;
     private String password;
     private List<UserRoleEntity> roles;
 
-    public UserEntity() {
-        roles = new ArrayList<>();
+    public UserServiceModel() {
     }
 
-    public UserEntity(String username, String password, List<UserRoleEntity> roles) {
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
+    public String getId() {
+        return id;
     }
 
-    @Column(nullable = false)
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -31,7 +30,6 @@ public class UserEntity extends BaseEntity {
         this.username = username;
     }
 
-    @Column(nullable = false)
     public String getPassword() {
         return password;
     }
@@ -40,7 +38,6 @@ public class UserEntity extends BaseEntity {
         this.password = password;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
     public List<UserRoleEntity> getRoles() {
         return roles;
     }

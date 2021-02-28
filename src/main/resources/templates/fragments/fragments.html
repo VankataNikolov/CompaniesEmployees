@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title>LinkedOut</title>
@@ -18,12 +21,19 @@
         </button>
         <div class="collapse navbar-collapse float-right" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link text-white" href="/companies/add">Add Company</a>
-                <a class="nav-item nav-link text-white" href="/employees/add">Add Employee</a>
+                <th:block sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-item nav-link text-white" href="/companies/add">Add Company</a>
+                    <a class="nav-item nav-link text-white" href="/employees/add">Add Employee</a>
+                </th:block>
+
                 <a class="nav-item nav-link text-white" href="/companies/all">All Companies</a>
                 <a class="nav-item nav-link text-white" href="/employees/all">All Employees</a>
-                <a class="nav-item nav-link text-white" href="/users/login">Login</a>
-                <a class="nav-item nav-link text-white" href="/users/register">Register</a>
+
+                <th:block sec:authorize="not isAuthenticated()">
+                    <a class="nav-item nav-link text-white" href="/users/login">Login</a>
+                    <a class="nav-item nav-link text-white" href="/users/register">Register</a>
+                </th:block>
+
             </div>
         </div>
     </nav>
